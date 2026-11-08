@@ -1,16 +1,15 @@
 <?php
-// public/index.php
 require_once __DIR__ . '/../src/services/SessionService.php';
 require_once __DIR__ . '/../src/services/ProductService.php';
 require_once __DIR__ . '/../src/services/CategoriasService.php';
 
 SessionService::init();
 
-// Obtener filtros de búsqueda o categoría si existen
+//  filtros de búsqueda 
 $busqueda = $_GET['busqueda'] ?? '';
 $categoria_id = $_GET['categoria_id'] ?? '';
 
-// Obtener productos y categorías usando los servicios
+//  productos y categorías 
 $productos = ProductService::getAllProducts($busqueda, $categoria_id);
 $categorias = CategoriasService::getAllCategories();
 ?>
@@ -25,7 +24,7 @@ $categorias = CategoriasService::getAllCategories();
 
 <body class="bg-light">
 
-    <!-- Barra de navegación superior -->
+    <!-- Barra de navegación de arriba -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
         <div class="container">
             <a class="navbar-brand" href="index.php">Tienda Online</a>
@@ -47,7 +46,7 @@ $categorias = CategoriasService::getAllCategories();
     <div class="container">
         <h1 class="mb-4">Catálogo de Productos</h1>
 
-        <!-- Formulario de Búsqueda y Filtros -->
+        <!--  Búsqueda y Filtros -->
         <form method="GET" action="index.php" class="row g-3 mb-4">
             <div class="col-md-8">
                 <input type="text" class="form-control" name="busqueda" placeholder="Buscar por marca, modelo o descripción..." value="<?= htmlspecialchars($busqueda) ?>">
@@ -67,7 +66,6 @@ $categorias = CategoriasService::getAllCategories();
             </div>
         </form>
 
-        <!-- Cuadrícula de Productos -->
         <div class="row">
             <?php if (empty($productos)): ?>
                 <div class="col-12">
