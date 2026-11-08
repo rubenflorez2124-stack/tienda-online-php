@@ -1,5 +1,4 @@
 <?php
-// public/login.php
 require_once __DIR__ . '/../src/services/SessionService.php';
 require_once __DIR__ . '/../src/config/Config.php';
 
