@@ -1,5 +1,4 @@
 <?php
-// public/details.php
 require_once __DIR__ . '/../src/services/SessionService.php';
 require_once __DIR__ . '/../src/services/ProductService.php';
 
@@ -39,7 +38,7 @@ $isAdmin = SessionService::isLoggedIn() && SessionService::get('role') === 'admi
 </head>
 
 <body class="container py-5">
-    <!-- Cabecera de navegación -->
+    <!-- Cabecera de web -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <a href="index.php" class="btn btn-outline-secondary btn-sm">← Volver al catálogo</a>
         <div>
@@ -56,7 +55,7 @@ $isAdmin = SessionService::isLoggedIn() && SessionService::get('role') === 'admi
 
     <!-- Detalle del Producto -->
     <div class="row g-5 align-items-center">
-        <!-- Columna de Imagen -->
+
         <div class="col-md-6 text-center">
             <div class="card shadow-sm p-3 border-0">
                 <img src="<?php echo htmlspecialchars($product['imagen'] ?: 'https://via.placeholder.com/400'); ?>"
@@ -66,7 +65,7 @@ $isAdmin = SessionService::isLoggedIn() && SessionService::get('role') === 'admi
             </div>
         </div>
 
-        <!-- Columna de Información -->
+        <!-- Información -->
         <div class="col-md-6">
             <span class="badge bg-primary mb-2"><?php echo htmlspecialchars($nombreCategoria); ?></span>
             <h1 class="display-5 fw-bold mb-3"><?php echo htmlspecialchars($product['marca'] . ' ' . $product['modelo']); ?></h1>
