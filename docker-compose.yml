@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  php-app:
+    build: .
+    container_name: php_app
+    ports:
+      - "${APP_PORT:-8080}:80"
+    env_file: .env
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - postgres-db
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html/public
+    networks:
+      - tienda-network
+
+  postgres-db:
+    image: postgres:12-alpine
+    container_name: postgres_db
+    env_file: .env
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - tienda-network
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres-db
+    networks:
+      - tienda-network
+
+volumes:
+  db_data:
+
+networks:
+  tienda-network:
+    driver: bridge
