@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS "usuarios";
 DROP SEQUENCE IF EXISTS usuarios_id_seq;
 DROP TABLE IF EXISTS "categorias";
 
--- Cuiddado con las secuencias, si se borran se pierde el autoincremento, ponemos el start a 6 para que empiece en 6
 CREATE SEQUENCE productos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 6 CACHE 1;
 
 CREATE TABLE "public"."productos"
