@@ -1,11 +1,10 @@
 <?php
-// public/create.php
 require_once __DIR__ . '/../src/services/SessionService.php';
 require_once __DIR__ . '/../src/services/ProductService.php';
 
 SessionService::init();
 
-// Seguridad: Solo los administradores pueden añadir productos
+// Seguridad: Solo los administradores exclusivos
 if (!SessionService::isLoggedIn() || SessionService::get('role') !== 'admin') {
     header('Location: index.php');
     exit;
@@ -14,7 +13,7 @@ if (!SessionService::isLoggedIn() || SessionService::get('role') !== 'admin') {
 $error = '';
 $success = '';
 
-// Obtener las categorías activas para el select del formulario
+// categorías activas para el select del formulario
 $categorias = ProductService::getCategories();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
